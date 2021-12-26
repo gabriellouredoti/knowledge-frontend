@@ -3,22 +3,30 @@
     <a class="toogle" @click.prevent="toogleMenu" v-if="!hideToogle">
       <i class="fa fa-lg" :class="icon"></i> 
     </a>
-    <h1 class="title">{{title}}</h1>
+    <h1 class="title">
+      <router-link to="/">{{title}}</router-link>
+    </h1>
+    <UserDropdown v-if="!hideUserDropdown"/>
   </header>
 </template>
 
 <script>
 
 import { mapState } from 'vuex'
+import UserDropdown from './UserDropdown.vue';
 
 export default {
   name: 'Header',
+  components: {
+    UserDropdown
+  },
   props: {
     title: {
       type: String,
       required: true
     },
-    hideToogle: Boolean 
+    hideToogle: Boolean,
+    hideUserDropdown: Boolean 
   },
   computed: {
     ...mapState(['isMenuVisible']),
@@ -62,6 +70,7 @@ export default {
     width: 60px;
     height: 100%;
     text-decoration: none;
+    color: #fff;
 
     display: flex;
     justify-content: center;
@@ -71,6 +80,7 @@ export default {
   header.header > a.toogle:hover{
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
 
   }
 
